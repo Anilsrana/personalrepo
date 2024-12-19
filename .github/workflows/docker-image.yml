@@ -13,4 +13,3 @@ jobs:
         run: docker build ./docker-project -t anilsrana07/aniltest:$(date +%s)
       - name: push to docker repo anilsrana07/aniltest
         run: docker push anilsrana07/aniltest:$(date +%s)
-       
