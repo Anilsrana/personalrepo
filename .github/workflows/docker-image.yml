@@ -11,4 +11,6 @@ jobs:
         uses: actions/checkout@v4
       - name: build Image
         run: docker build ./docker-project -t anilsrana07/aniltest:$(date +%s)
+      - name: push to docker repo anilsrana07/aniltest
+        run: docker push anilsrana07/aniltest:$(date +%s)
        
