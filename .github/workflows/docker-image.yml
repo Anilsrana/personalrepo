@@ -10,6 +10,6 @@ jobs:
       - name: checkout
         uses: actions/checkout@v4
       - name: build Image
-        run: docker build ./docker-project -t anilsrana07/aniltest:$(date +%s)
+        run: docker build ./docker-project -t anilsrana07/aniltest:neelam
       - name: push to docker repo anilsrana07/aniltest
-        run: docker push anilsrana07/aniltest:$(date +%s)
+        run: docker push anilsrana07/aniltest:neelam
