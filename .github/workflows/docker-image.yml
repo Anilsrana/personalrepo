@@ -11,5 +11,10 @@ jobs:
         uses: actions/checkout@v4
       - name: build Image
         run: docker build ./docker-project -t anilsrana07/aniltest:neelam
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: push to docker repo anilsrana07/aniltest
         run: docker push anilsrana07/aniltest:neelam
