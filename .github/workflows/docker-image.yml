@@ -1,0 +1,14 @@
+name: Docker Image build and push 
+
+on:
+  [workflow_dispatch]
+
+jobs:
+  publish_images:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: build Image
+        run: docker build ./docker-project -t anilsrana07/aniltest:$(date +%s)
+       
