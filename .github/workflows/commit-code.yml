@@ -1,10 +1,12 @@
 name: Update Repo1 Tag
 
 on:
-  workflow_dispatch:  # trigger manually
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      tag_version:
+        description: "Enter tag version (e.g. v2, v3)"
+        required: true
+        default: "v2"
 
 jobs:
   update-repo1:
@@ -20,14 +22,15 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Anilsrana/test1
-          token: ${{ secrets.REPO1_TOKEN }}   # store PAT in repo2 secrets
+          token: ${{ secrets.REPO1_TOKEN }}   # PAT stored in repo2 secrets
           path: test1
 
-      # Update test.txt
+      # Update test.txt with input tag
       - name: Update tag version
         run: |
           cd test1
-          sed -i 's/tag = v1/tag = v2/' test.txt
+          ls -la
+          sed -i "s/tag = .*/tag = ${{ github.event.inputs.tag_version }}/" test.txt
           cat test.txt
 
       # Commit and push changes
@@ -35,7 +38,4 @@ jobs:
         run: |
           cd test1
           git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add test.txt
-          git commit -m "Update tag to v2"
-          git push origin main
+          git config user.email "githu
