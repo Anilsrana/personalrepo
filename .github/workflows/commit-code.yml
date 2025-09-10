@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Anilsrana/test1
-          token: ${{ secrets.REPO1_TOKEN }}   # store PAT in repo2 secrets
+         # token: ${{ secrets.REPO1_TOKEN }}   # store PAT in repo2 secrets
           path: test1
 
       # Update test.txt
