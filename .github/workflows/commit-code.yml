@@ -1,0 +1,41 @@
+name: Update Repo1 Tag
+
+on:
+  workflow_dispatch:  # trigger manually
+  push:
+    branches:
+      - main
+
+jobs:
+  update-repo1:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout repo2 (default)
+      - name: Checkout repo2
+        uses: actions/checkout@v4
+
+      # Checkout repo1 (needs PAT with repo write access)
+      - name: Checkout repo1
+        uses: actions/checkout@v4
+        with:
+          repository: Anilsrana/test1
+          token: ${{ secrets.REPO1_TOKEN }}   # store PAT in repo2 secrets
+          path: test1
+
+      # Update test.txt
+      - name: Update tag version
+        run: |
+          cd test1
+          sed -i 's/tag = v1/tag = v2/' test.txt
+          cat test.txt
+
+      # Commit and push changes
+      - name: Commit & Push changes
+        run: |
+          cd test1
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add test.txt
+          git commit -m "Update tag to v2"
+          git push origin main
