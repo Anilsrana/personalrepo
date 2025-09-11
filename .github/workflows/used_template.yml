@@ -1,4 +1,4 @@
-name: Update test1 Tag
+name: Update test1 Tag using template
 
 on:
   workflow_dispatch:
