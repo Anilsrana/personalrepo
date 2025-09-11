@@ -1,0 +1,22 @@
+name: Update test1 Tag
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag_version:
+        description: "Enter tag version (e.g. v2, v3)"
+        required: true
+        default: "v2"
+      file_path:
+        description: "Enter file path (e.g. test.txt)"
+        required: true
+        default: "test.txt"
+
+jobs:
+  call-update-tag:
+    uses: Anilsrana/test1/.github/workflows/update_tag.yml@main
+    with:
+      tag_version: ${{ github.event.inputs.tag_version }}
+      file_path: ${{ github.event.inputs.file_path }}
+    secrets:
+      REPO1_TOKEN: ${{ secrets.REPO1_TOKEN }}
